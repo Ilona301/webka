@@ -1,11 +1,7 @@
-@import "tailwindcss";
-
-@tailwind utilities;
-
 @font-face {
     font-family: 'NovaSquare';
     src: url('/fonts/Aclonica-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-    font-display: swap;
+    font-display: swap; /* Good choice—shows fallback fonts while loading */
 }

@@ -11,7 +11,7 @@ export default {
                 xs: '480px', // Custom breakpoint below sm (640px)
             },
             fontFamily: {
-                Against: ['"Against"', 'italic'],
+                Aclonica: ['"Aclonica"', 'italic'],
             },
             colors: {
                 gold: '#FFD700',
