@@ -1,85 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronDown } from 'lucide-react';
+import React from 'react';
 
 const MainSection = () => {
-    const [isVisible, setIsVisible] = useState(false);
-
-    useEffect(() => {
-        setIsVisible(true);
-    }, []);
-
-    const scrollToNext = () => {
-        window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
-    };
-
     return (
-        <div className="relative w-full h-screen overflow-hidden bg-gradient-to-br from-[#faf8f5] to-[#e8e4df]">
-            {/* Main content - Upper-Middle */}
-            <div className="relative z-10 flex flex-col items-center justify-start h-full px-4 sm:px-6 lg:px-8 pt-24 sm:pt-32 md:pt-40">
-
-                {/* Main heading */}
-                <div
-                    className={`text-center mb-4 sm:mb-6 transition-all duration-1000 delay-200 ${
-                        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                    }`}
-                >
-                    <h1
-                        className="text-3xl sm:text-3xl md:text-3xl lg:text-3xl xl:text-4xl font-bold font-[Aclonica] text-gray-600 mb-2 sm:mb-3"
-                        style={{ fontFamily: 'Aclonica' }}
-                    >
-                        Make your ideas alive with
-                    </h1>
-                    <div className="flex flex-col items-center gap-2 sm:gap-3">
-                        <img
-                            className="flex justify-center items-center  w-64 sm:w-64 md:w-64 lg:w-64
-                              h-20 object-cover max-w-full "
-                            src="/images/logo/logo.png"
-                            alt="Webka Logo"
-                        />
-                    </div>
-                </div>
-
-                {/* Abstract Subtext */}
-                <p
-                    className={`text-sm sm:text-base md:text-lg lg:text-xl text-[#b4b4b4] text-center max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl px-4 mb-8 sm:mb-10 md:mb-12 leading-relaxed transition-all duration-1000 delay-400 ${
-                        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                    }`}
-                    style={{ fontFamily: 'Aclonica' }}
-                >
-                   Tell us your idea.
-                </p>
-
-                {/* CTA Button */}
-                <button
-                    className={`px-6 sm:px-8 md:px-10 py-2.5 sm:py-3 border-2  text-[#b4b4b4] text-xs sm:text-sm tracking-widest  transition-all duration-300 hover:scale-105 shadow-md ${
-                        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                    }`}
-                    style={{ fontFamily: 'serif' }}
-                >
-                    DISCOVER MORE
-                </button>
+        <div>
+        <div className="h-[100vh] flex flex-col justify-center items-center bg-[#edebe9] gap-30">
+            <div className="flex justify-center items-center flex-col">
+                <img className="w-[500px] h-[200px] object-cover" src="/images/logo/logo.svg" alt="logo"/>
+                <p className="font-bold">To create is to live twice.</p>
             </div>
-
-            {/* Scroll indicator - Bottom but visible */}
-            <div
-                className={`absolute bottom-8 sm:bottom-12 md:bottom-16 lg:bottom-20 left-1/2 transform -translate-x-1/2 flex flex-col items-center cursor-pointer group transition-all duration-1000 delay-600 ${
-                    isVisible ? 'opacity-100' : 'opacity-0'
-                }`}
-                onClick={scrollToNext}
-            >
-                <span className="text-[#b4b4b4] text-xs tracking-widest mb-2 group-hover:text-black transition-colors" style={{ fontFamily: 'serif' }}>
-                    SCROLL
-                </span>
-                <div className="animate-bounce">
-                    <ChevronDown
-                        className="w-5 h-5 text-[#b4b4b4] group-hover:text-black transition-colors"
-                        strokeWidth={1.5}
-                    />
-                </div>
+            <button className="px-9 py-2 bg-[#edebe9] rounded-full shadow-[0_4px_0_0_#edebe9,0_4px_10px_rgba(0,0,0,0.4)] hover:shadow-[0_2px_0_0_#edebe9,0_2px_8px_rgba(0,0,0,0.1)] hover:translate-y-[2px] transition-all duration-150 text-[#453336] font-bold">
+                Get your Webka
+            </button>
+        </div>
+    <div className="h-[100vh] bg-[#453336] flex justify-center items-center ">
+        <img className=" absolute top-[65vh] left-0 w-[500px] h-[500px] inline" src="/images/robot.svg" alt="robot"/>
+        <div className="w-[90%] flex justify-center items-center h-[70%] border-b-2 border-b-[#b4b4b4]">
+            <div className="w-[30%] h-[200px] ">
+                <h1 className="font-[NotoSerifDisplay] text-[35px] text-[#b4b4b4]">About the company</h1>
+                <p className="text-[#b4b4b4] text-left">We are the bridge between your vision and its digital reality. When you trust us with your ideas, we don't just build websites—we craft spaces where your story comes alive and your purpose finds its voice. Your growth fuels ours, and our dedication fuels yours.</p>
             </div>
-
-            {/* Subtle decorative element */}
-            <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#c4a788]/20 to-transparent" />
+            <div className="w-[20%] h-[200px] border-l-2 border-l-[#b4b4b4] pl-[25px] text-left">
+                <h1 className="font-[NotoSerifDisplay] text-[35px] text-[#b4b4b4]">About us</h1>
+                <p className="text-[#b4b4b4]">We are the bridge between your vision and its digital reality. When you trust us with your ideas, we don't just build websites—we craft spaces.</p>
+            </div>
+        </div>
+    </div>
         </div>
     );
 };

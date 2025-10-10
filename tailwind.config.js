@@ -11,7 +11,7 @@ export default {
                 xs: '480px', // Custom breakpoint below sm (640px)
             },
             fontFamily: {
-                Aclonica: ['"Aclonica"', 'italic'],
+                NotoSerifDisplay: ['"NotoSerifDisplay"', 'italic'],
             },
             colors: {
                 gold: '#FFD700',
