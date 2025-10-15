@@ -9,3 +9,47 @@
     font-style: normal;
     font-display: swap;
 }
+
+/* --- Minimal retro pixel animation for WEBKA text --- */
+@keyframes subtleFlicker {
+    0%, 100% {
+        opacity: 1;
+        filter: brightness(1);
+        transform: translateY(0);
+    }
+    10% {
+        opacity: 0.95;
+        filter: brightness(0.9);
+        transform: translateY(-0.5px);
+    }
+    20% {
+        opacity: 0.9;
+        filter: brightness(1.05);
+    }
+    30% {
+        opacity: 0.98;
+    }
+    40% {
+        filter: brightness(0.95);
+    }
+    50% {
+        opacity: 1;
+        filter: brightness(1);
+    }
+    70% {
+        opacity: 0.97;
+        filter: brightness(1.1);
+    }
+    85% {
+        opacity: 1;
+        filter: brightness(0.98);
+    }
+}
+
+.retro-minimal {
+    display: inline-block;
+    letter-spacing: 4px;
+    animation: subtleFlicker 2.5s infinite steps(1);
+    text-shadow: 0 0 1px #fff3, 0 0 2px #f5e7d7;
+    transition: all 0.3s ease;
+}

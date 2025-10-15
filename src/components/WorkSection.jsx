@@ -31,7 +31,7 @@ const WorkSection = () => {
                    </div>
                    <div className="flex flex-col gap-3  border-r border-[#453336] pr-8 w-full">
                        <h2 className="text-[#453336] font-[Retropix] text-[20px] text-right">WE BUILD IT</h2>
-                       <img className="w-[250px] h-[80px] object-cover"
+                       <img className="w-[200px] h-[80px] object-cover"
                            src="/images/play.svg" alt=""/>
                        <div >
                            <p className="font-[Retropix] text-[#edebe9] text-right">
@@ -45,7 +45,7 @@ const WorkSection = () => {
                            <p className="font-[Retropix] text-[#edebe9] text-center">
                                You receive a complete, ready-to-use website built around your goals.
                            </p>
-                           <img className="object-cover w-[200px] h-[60px]"
+                           <img className="object-cover w-[200px] h-[80px]"
                                 src="/images/rocket.svg" alt="rocket"/>
                        </div>
                    </div>
