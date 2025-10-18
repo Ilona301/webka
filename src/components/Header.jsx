@@ -1,8 +1,10 @@
 import React, { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom'; // ✅ Add this import
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const audioRef = useRef(null);
+    const navigate = useNavigate(); // ✅ Add this hook
 
     const playSound = () => {
         if (audioRef.current) {
@@ -11,9 +13,20 @@ const Header = () => {
         }
     };
 
-    const handleLinkClick = () => {
+    const handleLinkClick = (item) => {
         playSound();
         setIsMenuOpen(false);
+
+        // ✅ Navigate to contact page if Contact is clicked
+        if (item === 'Contact') {
+            navigate('/contact');
+        } else {
+            // For other links, scroll to section
+            const element = document.getElementById(item.toLowerCase().replace(' ', ''));
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
     };
 
     return (
@@ -23,21 +36,23 @@ const Header = () => {
 
             <div className="h-[60px] w-[92%] mx-auto flex justify-between items-center">
                 {/* Logo/Brand */}
-                <div className="text-[#f5e7d7] text-lg sm:text-base font-[Retropix] tracking-widest drop-shadow-[0_2px_0_#453336] select-none">
+                <div
+                    className="text-[#f5e7d7] text-lg sm:text-base font-[Retropix] tracking-widest drop-shadow-[0_2px_0_#453336] select-none cursor-pointer"
+                    onClick={() => navigate('/')}
+                >
                     GET YOUR WEBKA
                 </div>
 
                 {/* Desktop Navigation */}
                 <div className="hidden md:flex gap-8 text-lg font-[Retropix]">
                     {['Home', 'About us', 'Our works', 'Contact'].map((item, i) => (
-                        <a
+                        <button
                             key={i}
-                            href={`#${item.toLowerCase().replace(' ', '')}`}
-                            onClick={playSound}
+                            onClick={() => handleLinkClick(item)}
                             className="relative text-[#f5e7d7] transition-all duration-150 hover:text-[#453336] after:content-[''] after:absolute after:left-0 after:bottom-[-2px] after:w-0 after:h-[2px] after:bg-[#453336] hover:after:w-full after:transition-all after:duration-150"
                         >
                             {item}
-                        </a>
+                        </button>
                     ))}
                 </div>
 
@@ -47,11 +62,11 @@ const Header = () => {
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                     aria-label="Toggle menu"
                 >
-          <span
-              className={`w-4/5 h-0.5 bg-[#453336] transition-all duration-300 ${
-                  isMenuOpen ? 'rotate-45 translate-y-[5px]' : ''
-              }`}
-          ></span>
+                    <span
+                        className={`w-4/5 h-0.5 bg-[#453336] transition-all duration-300 ${
+                            isMenuOpen ? 'rotate-45 translate-y-[5px]' : ''
+                        }`}
+                    ></span>
                     <span
                         className={`w-4/5 h-0.5 bg-[#453336] transition-all duration-300 ${
                             isMenuOpen ? 'opacity-0' : ''
@@ -73,14 +88,13 @@ const Header = () => {
             >
                 <div className="bg-[#f5e7d7] border-t-4 border-[#453336] shadow-[0_4px_0_#453336] flex flex-col items-center py-5 gap-4 font-[Retropix] text-[#453336] text-base">
                     {['Home', 'About us', 'Our works', 'Contact'].map((item, i) => (
-                        <a
+                        <button
                             key={i}
-                            href={`#${item.toLowerCase().replace(' ', '')}`}
                             className="relative hover:text-[#52959e] transition-all hover:brightness-125 after:content-['▸'] after:ml-1 after:text-[#65a88c]"
-                            onClick={handleLinkClick}
+                            onClick={() => handleLinkClick(item)}
                         >
                             {item}
-                        </a>
+                        </button>
                     ))}
                 </div>
             </div>
