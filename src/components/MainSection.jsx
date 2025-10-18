@@ -1,7 +1,9 @@
 import React, { useRef } from 'react';
+import {useNavigate} from "react-router-dom";
 
 const MainSection = () => {
     const audioRef = useRef(null);
+    const navigate = useNavigate();
 
     const playSound = () => {
         if (audioRef.current) {
@@ -9,7 +11,10 @@ const MainSection = () => {
             audioRef.current.play();
         }
     };
-
+    const handleClick = () => {
+        playSound(); // run your sound function
+        window.open("/getWebka", "_blank");// go to the route
+    };
     return (
         <div className="relative">
             <audio ref={audioRef} src="/audio/retro_button_audio.mp3" preload="auto" />
@@ -32,14 +37,17 @@ const MainSection = () => {
                 </div>
 
                 <button
-                    onClick={playSound}
-                    className="font-[Retropix] relative px-6 sm:px-9 py-3 bg-[#f5e7d7] border-4 border-[#453336] text-[#453336] text-sm sm:text-base font-bold uppercase tracking-wider
-                    before:content-[''] before:absolute before:inset-0 before:translate-x-[4px] before:translate-y-[4px] before:bg-[#bfa48b] before:-z-10
-                    hover:before:bg-[#f9d56e] hover:bg-[#fff2c2] hover:text-[#2c1a1d]
-                    active:translate-x-[4px] active:translate-y-[4px] active:before:translate-x-0 active:before:translate-y-0
-                    transition-all duration-150 ease-out">
-                    Get your Webka
-                </button>
+                     onClick={handleClick}
+                className="font-[Retropix] relative px-6 sm:px-9 py-3 bg-[#f5e7d7] border-4 border-[#453336] text-[#453336] text-sm sm:text-base font-bold uppercase tracking-wider
+                before:content-[''] before:absolute before:inset-0 before:translate-x-[4px] before:translate-y-[4px] before:bg-[#bfa48b] before:-z-10
+                hover:before:bg-[#f9d56e] hover:bg-[#fff2c2] hover:text-[#2c1a1d]
+                active:translate-x-[4px] active:translate-y-[4px] active:before:translate-x-0 active:before:translate-y-0
+                transition-all duration-150 ease-out">
+
+                Get your Webka
+            </button>
+
+
             </div>
 
             {/* ABOUT SECTION */}
