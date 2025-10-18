@@ -1,34 +1,49 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 const MainSection = () => {
+    const audioRef = useRef(null);
+
+    const playSound = () => {
+        if (audioRef.current) {
+            audioRef.current.currentTime = 0;
+            audioRef.current.play();
+        }
+    };
+
     return (
         <div className="relative">
+            <audio ref={audioRef} src="/audio/retro_button_audio.mp3" preload="auto" />
+
             <img
                 className="absolute top-[80vh] lg:top-[60vh] lg:left-0 w-60 sm:w-56 md:w-64 lg:w-80 xl:w-[500px] h-auto z-10"
                 src="/images/logo/robot.svg"
                 alt="robot"
             />
 
-            <div className="min-h-screen flex flex-col justify-center items-center bg-[#52959e] gap-8 px-4 py-12">
+            {/* MAIN HERO */}
+            <div className="min-h-screen flex flex-col justify-center items-center bg-[#52959e] gap-8 px-4 py-12 overflow-hidden">
                 <div className="flex justify-center items-center flex-col">
-                   <h1 className="font-[Retropix] text-[70px] text-[#f5e7d7]">WEBKA</h1>
-                    <p className="text-center mt-4 text-[20px] font-[Retropix] text-[#f5e7d7] ">
+                    <h1 className="font-[Retropix] text-[70px] text-[#f5e7d7] retro-minimal">
+                        WEBKA
+                    </h1>
+                    <p className="text-center mt-4 text-[20px] font-[Retropix] text-[#f5e7d7]">
                         To create is to live twice.
                     </p>
                 </div>
-                <button className="font-[Retropix] relative px-6 sm:px-9 py-3 bg-[#f5e7d7] border-4 border-[#453336] text-[#453336] text-sm sm:text-base font-bold uppercase tracking-wider
-before:content-[''] before:absolute before:inset-0 before:translate-x-[4px] before:translate-y-[4px] before:bg-[#bfa48b] before:-z-10
-hover:before:bg-[#f9d56e] hover:bg-[#fff2c2] hover:text-[#2c1a1d]
-active:translate-x-[4px] active:translate-y-[4px] active:before:translate-x-0 active:before:translate-y-0
-transition-all duration-150 ease-out">
+
+                <button
+                    onClick={playSound}
+                    className="font-[Retropix] relative px-6 sm:px-9 py-3 bg-[#f5e7d7] border-4 border-[#453336] text-[#453336] text-sm sm:text-base font-bold uppercase tracking-wider
+                    before:content-[''] before:absolute before:inset-0 before:translate-x-[4px] before:translate-y-[4px] before:bg-[#bfa48b] before:-z-10
+                    hover:before:bg-[#f9d56e] hover:bg-[#fff2c2] hover:text-[#2c1a1d]
+                    active:translate-x-[4px] active:translate-y-[4px] active:before:translate-x-0 active:before:translate-y-0
+                    transition-all duration-150 ease-out">
                     Get your Webka
                 </button>
-
-
             </div>
 
+            {/* ABOUT SECTION */}
             <div className="min-h-screen bg-[#edebe9] flex justify-center items-center relative px-4 py-12">
-
                 <div className="w-full max-w-6xl flex flex-col lg:flex-row justify-center items-start lg:items-center gap-8 lg:gap-12 border-b-2 border-b-[#b4b4b4] pb-12">
                     <div className="w-full lg:w-[60%]">
                         <h1 className="font-[Retropix] text-2xl sm:text-3xl lg:text-4xl text-[#453336] mb-4">
