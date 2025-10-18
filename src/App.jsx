@@ -22,7 +22,12 @@ function App() {
                     </>
                 } />
 
-                <Route path="/getWebka" element={<GetYourWebka />} />
+                <Route path="/getWebka" element={
+                    <>
+                        <Header />
+                        <GetYourWebka />
+                    </>}
+                    />
 
                 <Route path="/contact" element={
                     <>

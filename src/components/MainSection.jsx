@@ -13,7 +13,7 @@ const MainSection = () => {
     };
     const handleClick = () => {
         playSound(); // run your sound function
-        window.open("/getWebka", "_blank");// go to the route
+        navigate("/getWebka");// go to the route
     };
     return (
         <div className="relative">
