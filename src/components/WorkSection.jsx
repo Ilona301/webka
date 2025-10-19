@@ -3,7 +3,7 @@ import React from 'react';
 
 const WorkSection = () => {
     return (
-        <div className="bg-[#52959e] h-[100vh] flex justify-center items-center">
+        <div className="bg-[#52959e] h-[calc(100vh-60px)] flex justify-center items-center">
            <div className="w-[70%] flex justify-center  flex-col gap-6">
                 <h1 className="font-[Retropix] text-[40px] text-[#d7ca75]">HOW WE WORK?</h1>
                <div className="flex items-center justify-center gap-20 ">

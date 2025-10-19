@@ -7,6 +7,7 @@ import WhyChooseSection from "./components/WhyChooseSection.jsx";
 import GetYourWebka from "./components/GetYourWebka.jsx";
 import Contact from "./components/Contact.jsx";
 import { Routes, Route } from "react-router-dom";
+import OurWorks from "./components/OurWorks.jsx";
 
 function App() {
     return (
@@ -33,6 +34,19 @@ function App() {
                     <>
                         <Header />
                         <Contact />
+                    </>
+                } />
+
+                <Route path="/about" element={
+                    <>
+                        <Header />
+                        <AboutSection />
+                    </>
+                } />
+                <Route path="/our-works" element={
+                    <>
+
+                        <OurWorks />
                     </>
                 } />
             </Routes>

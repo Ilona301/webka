@@ -2,7 +2,7 @@ import React from 'react';
 
 const WhyChooseSection = () => {
     return (
-        <div className="flex justify-center items-center w-full h-[100vh] bg-[#601d33] relative">
+        <div className="flex justify-center items-center w-full h-[calc(100vh-60px)] bg-[#601d33] relative">
             <img className="absolute left-[-12rem] top-0" src="/images/globe.svg" alt="globe"/>
             <div className="w-[75%] flex flex-col gap-35 justify-between relative">
                 <h1 className="font-[Retropix] text-4xl text-[#fffeb3] text-right">WHY CHOOSE US?</h1>

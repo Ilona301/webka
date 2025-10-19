@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom'; // ✅ Add this import
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const audioRef = useRef(null);
-    const navigate = useNavigate(); // ✅ Add this hook
+    const navigate = useNavigate();
 
     const playSound = () => {
         if (audioRef.current) {
@@ -13,14 +13,28 @@ const Header = () => {
         }
     };
 
+    const handleLogoClick = () => {
+        playSound();
+        navigate('/');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     const handleLinkClick = (item) => {
         playSound();
         setIsMenuOpen(false);
 
-        // ✅ Navigate to contact page if Contact is clicked
-        if (item === 'Contact') {
+        // Navigate to home page and scroll to top if Home is clicked
+        if (item === 'Home') {
+            navigate('/');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        // Navigate to contact page if Contact is clicked
+        else if (item === 'Contact') {
             navigate('/contact');
-        } else {
+        }
+        else if (item === 'Our works') {
+            navigate('/our-works');
+        }else {
             // For other links, scroll to section
             const element = document.getElementById(item.toLowerCase().replace(' ', ''));
             if (element) {
@@ -38,7 +52,7 @@ const Header = () => {
                 {/* Logo/Brand */}
                 <div
                     className="text-[#f5e7d7] text-lg sm:text-base font-[Retropix] tracking-widest drop-shadow-[0_2px_0_#453336] select-none cursor-pointer"
-                    onClick={() => navigate('/')}
+                    onClick={handleLogoClick}
                 >
                     GET YOUR WEBKA
                 </div>
