@@ -1,46 +1,55 @@
 import React, { useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const audioRef = useRef(null);
     const navigate = useNavigate();
+    const location = useLocation();
 
     const playSound = () => {
         if (audioRef.current) {
             audioRef.current.currentTime = 0;
-            audioRef.current.play();
+            audioRef.current.play().catch((error) => {
+                console.error('Audio playback failed:', error);
+            });
+        } else {
+            console.error('Audio ref is not initialized');
         }
     };
 
     const handleLogoClick = () => {
         playSound();
-        navigate('/');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setTimeout(() => {
+            navigate('/');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 150);
     };
 
     const handleLinkClick = (item) => {
         playSound();
         setIsMenuOpen(false);
 
-        // Navigate to home page and scroll to top if Home is clicked
-        if (item === 'Home') {
-            navigate('/');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-        // Navigate to contact page if Contact is clicked
-        else if (item === 'Contact') {
-            navigate('/contact');
-        }
-        else if (item === 'Our works') {
-            navigate('/our-works');
-        }else {
-            // For other links, scroll to section
-            const element = document.getElementById(item.toLowerCase().replace(' ', ''));
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => {
+            if (item === 'Home') {
+                navigate('/');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (item === 'Contact') {
+                navigate('/contact');
+            } else if (item === 'Our works') {
+                navigate('/our-works');
+            } else if (item === 'About us') {
+                if (location.pathname === '/') {
+                    const element = document.getElementById('aboutus');
+                    if (element) element.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    navigate('/about');
+                }
+            } else {
+                const element = document.getElementById(item.toLowerCase().replace(' ', ''));
+                if (element) element.scrollIntoView({ behavior: 'smooth' });
             }
-        }
+        }, 150);
     };
 
     return (
@@ -58,7 +67,7 @@ const Header = () => {
                 </div>
 
                 {/* Desktop Navigation */}
-                <div className="hidden md:flex gap-8 text-lg font-[Retropix]">
+                <div className="hidden md:flex gap-8 text-xl font-[Retropix]">
                     {['Home', 'About us', 'Our works', 'Contact'].map((item, i) => (
                         <button
                             key={i}
