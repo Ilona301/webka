@@ -26,11 +26,17 @@ const Header = () => {
         }, 150);
     };
 
+    const handleMenuToggle = () => {
+        playSound();
+        setIsMenuOpen(!isMenuOpen);
+    };
+
     const handleLinkClick = (item) => {
         playSound();
-        setIsMenuOpen(false);
 
         setTimeout(() => {
+            setIsMenuOpen(false);
+
             if (item === 'Home') {
                 navigate('/');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -82,7 +88,7 @@ const Header = () => {
                 {/* Mobile Menu Button */}
                 <button
                     className="md:hidden flex flex-col gap-1.5 w-7 h-7 justify-center items-center border-2 border-[#453336] bg-[#f5e7d7] shadow-[2px_2px_0_#453336] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all"
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    onClick={handleMenuToggle}
                     aria-label="Toggle menu"
                 >
                     <span

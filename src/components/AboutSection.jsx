@@ -2,7 +2,7 @@ import React from 'react';
 
 const AboutSection = () => {
     return (
-        <div id="aboutus" className="min-h-screen bg-[#edebe9] flex justify-center items-center relative px-4 py-12 h-[calc(100vh-60px)]">
+        <div id="aboutus" className="bg-[#edebe9] flex justify-center items-center relative px-4 py-12 h-[calc(100vh-60px)]">
             <div className="w-full max-w-6xl flex flex-col lg:flex-row justify-center items-start lg:items-center gap-8 lg:gap-12 border-b-2 border-b-[#b4b4b4] pb-12">
                 <div className="w-full lg:w-[60%]">
                     <h1 className="font-[Retropix] text-2xl sm:text-3xl lg:text-4xl text-[#453336] mb-4">

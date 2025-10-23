@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import emailjs from '@emailjs/browser';
 
 const GetYourWebka = () => {
-    const audioRef = useRef(null);
+    const submitAudioRef = useRef(null);
+    const backAudioRef = useRef(null);
     const formRef = useRef(null);
     const navigate = useNavigate();
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -14,23 +15,34 @@ const GetYourWebka = () => {
         emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
     }, []);
 
-    const playSound = () => {
-        if (audioRef.current) {
-            audioRef.current.currentTime = 0;
-            audioRef.current.play();
+    const playSubmitSound = () => {
+        if (submitAudioRef.current) {
+            submitAudioRef.current.currentTime = 0;
+            submitAudioRef.current.play();
         }
     };
 
     const handleGoBack = () => {
-        playSound();
-        setTimeout(() => {
+        if (backAudioRef.current) {
+            backAudioRef.current.currentTime = 0;
+            backAudioRef.current.play()
+                .then(() => {
+                    setTimeout(() => {
+                        navigate("/");
+                    }, 300);
+                })
+                .catch(error => {
+                    console.error("Audio playback failed:", error);
+                    navigate("/");
+                });
+        } else {
             navigate("/");
-        }, 300);
+        }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        playSound();
+        playSubmitSound();
         setIsSubmitting(true);
         setSubmitStatus('');
 
@@ -142,7 +154,9 @@ const GetYourWebka = () => {
                         </button>
                     </div>
 
-                    <audio ref={audioRef} src="/audio/retro_button_audio.mp3" preload="auto"></audio>
+                    {/* Audio elements */}
+                    <audio ref={submitAudioRef} src="/audio/button_success.mp3" preload="auto"></audio>
+                    <audio ref={backAudioRef} src="/audio/link_click.mp3" preload="auto"></audio>
                 </form>
             </div>
         </>
