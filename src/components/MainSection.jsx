@@ -1,24 +1,35 @@
-import React, { useRef } from 'react';
-import {useNavigate} from "react-router-dom";
+import React, { useRef, useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import AboutSection from "./AboutSection.jsx";
+import RetroLoader from "./RetroLoader.jsx";
 
 const MainSection = () => {
     const audioRef = useRef(null);
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(true); // State to track loading
+
+    // Simulate component loading (e.g., when critical content is ready)
+    useEffect(() => {
+        // You can add conditions here, e.g., check if images or other resources are loaded
+        const timer = setTimeout(() => {
+            setIsLoading(false); // Set loading to false after content is ready
+        }, 500); // Adjust delay as needed (or remove if using resource-based checks)
+
+        return () => clearTimeout(timer); // Cleanup on unmount
+    }, []);
 
     const handleClick = () => {
         if (audioRef.current) {
             audioRef.current.currentTime = 0;
             audioRef.current.play()
                 .then(() => {
-                    // Wait for sound to play before navigating
                     setTimeout(() => {
                         navigate("/getWebka");
-                    }, 300); // Adjust timing based on your audio duration
+                    }, 300);
                 })
                 .catch(error => {
                     console.error("Audio playback failed:", error);
-                    navigate("/getWebka"); // Navigate anyway if audio fails
+                    navigate("/getWebka");
                 });
         } else {
             navigate("/getWebka");
@@ -26,41 +37,48 @@ const MainSection = () => {
     };
 
     return (
-        <div className="relative w-full overflow-x-hidden ">
-            <audio ref={audioRef} src="/audio/link_click.mp3" preload="auto" />
+        <>
+            {isLoading && <RetroLoader />}
+            <div className="relative w-full overflow-x-hidden">
+                <audio ref={audioRef} src="/audio/link_click.mp3" preload="auto" />
 
-            <img
-                className="absolute top-[60vh] left-[-4rem] w-120 xs:w-56 sm:w-60 md:w-64 lg:top-[60vh] lg:w-80 xl:w-[500px] h-auto z-10 pointer-events-none"
-                src="/images/logo/robot.svg"
-                alt="robot"
-            />
+                <img
+                    className="absolute left-[-4rem] -translate-y-1/2 w-100 sm:w-100 md:w-100 lg:w-100 xl:w-[500px] h-auto z-10 pointer-events-none sm:top-[100vh]"
+                    style={{ top: "calc(var(--vh, 1vh) * 100)" }}
+                    src="/images/logo/robot.svg"
+                    alt="robot"
+                    onLoad={() => setIsLoading(false)} // Optional: Trigger when image loads
+                />
 
-            {/* MAIN HERO */}
-            <div className="w-full flex flex-col justify-center items-center bg-[#52959e] gap-6 sm:gap-8 px-4 py-12 h-[100vh]">
-                <div className="flex justify-center items-center flex-col max-w-full">
-                    <h1 className="font-[Retropix] text-[clamp(2.5rem,12vw,70px)] text-[#f5e7d7] retro-minimal text-center leading-none">
-                        WEBKA
-                    </h1>
-                    <p className="text-center mt-3 sm:mt-4 text-[clamp(1rem,4vw,20px)] font-[Retropix] text-[#f5e7d7] px-4 max-w-full">
-                        To create is to live twice.
-                    </p>
+                {/* MAIN HERO */}
+                <div
+                    className="w-full flex flex-col justify-center items-center bg-[#52959e] gap-6 sm:gap-8 px-4 py-12"
+                    style={{ height: "calc(var(--vh, 1vh) * 100)" }}>
+                    <div className="flex justify-center items-center flex-col max-w-full">
+                        <h1 className="font-[Retropix] text-[clamp(2.5rem,12vw,70px)] text-[#f5e7d7] retro-minimal text-center leading-none">
+                            WEBKA
+                        </h1>
+                        <p className="text-center mt-3 sm:mt-4 text-[clamp(1rem,4vw,20px)] font-[Retropix] text-[#f5e7d7] px-4 max-w-full">
+                            To create is to live twice.
+                        </p>
+                    </div>
+
+                    <button
+                        onClick={handleClick}
+                        className="font-[Retropix] relative px-4 xs:px-6 sm:px-9 py-2.5 sm:py-3 bg-[#f5e7d7] border-3 sm:border-4 border-[#453336] text-[#453336] text-xs xs:text-sm sm:text-base font-bold uppercase tracking-wider
+                        before:content-[''] before:absolute before:inset-0 before:translate-x-[3px] before:translate-y-[3px] sm:before:translate-x-[4px] sm:before:translate-y-[4px] before:bg-[#bfa48b] before:-z-10
+                        hover:before:bg-[#f9d56e] hover:bg-[#fff2c2] hover:text-[#2c1a1d]
+                        active:translate-x-[3px] active:translate-y-[3px] sm:active:translate-x-[4px] sm:active:translate-y-[4px] active:before:translate-x-0 active:before:translate-y-0
+                        transition-all duration-150 ease-out whitespace-nowrap"
+                    >
+                        Get your Webka
+                    </button>
                 </div>
 
-                <button
-                    onClick={handleClick}
-                    className="font-[Retropix] relative px-4 xs:px-6 sm:px-9 py-2.5 sm:py-3 bg-[#f5e7d7] border-3 sm:border-4 border-[#453336] text-[#453336] text-xs xs:text-sm sm:text-base font-bold uppercase tracking-wider
-                    before:content-[''] before:absolute before:inset-0 before:translate-x-[3px] before:translate-y-[3px] sm:before:translate-x-[4px] sm:before:translate-y-[4px] before:bg-[#bfa48b] before:-z-10
-                    hover:before:bg-[#f9d56e] hover:bg-[#fff2c2] hover:text-[#2c1a1d]
-                    active:translate-x-[3px] active:translate-y-[3px] sm:active:translate-x-[4px] sm:active:translate-y-[4px] active:before:translate-x-0 active:before:translate-y-0
-                    transition-all duration-150 ease-out whitespace-nowrap"
-                >
-                    Get your Webka
-                </button>
+                {/* ABOUT SECTION */}
+                <AboutSection />
             </div>
-
-            {/* ABOUT SECTION */}
-            <AboutSection/>
-        </div>
+        </>
     );
 };
 

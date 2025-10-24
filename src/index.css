@@ -53,3 +53,13 @@
     text-shadow: 0 0 1px #fff3, 0 0 2px #f5e7d7;
     transition: all 0.3s ease;
 }
+@keyframes blink {
+    0%, 20% { opacity: 0; }
+    50% { opacity: 1; }
+    80%, 100% { opacity: 0; }
+}
+
+.dots::after {
+    content: '...';
+    animation: blink 1.2s infinite steps(1, start);
+}
