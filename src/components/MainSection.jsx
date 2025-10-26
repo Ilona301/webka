@@ -61,15 +61,10 @@ const MainSection = () => {
 
                 {/* ✅ MAIN HERO */}
                 <div
-                    className="w-full flex flex-col justify-center items-center bg-[#52959e] gap-6 sm:gap-8 px-4 py-12 transition-all duration-300"
-                    style={{
-                        // On mobile -> 50% screen, on larger -> full
-                        height: "calc(var(--vh, 1vh) * 100)",
-                        minHeight: "50dvh",
-                    }}
-                >
+                    className="w-full flex flex-col justify-center items-center bg-[#52959e] gap-6 sm:gap-8 px-4 py-12"
+                    style={{ height: "calc(var(--vh, 1vh) * 100)" }}>
                     <div className="flex justify-center items-center flex-col max-w-full">
-                        <h1 className="font-[Retropix] text-[clamp(2.5rem,12vw,70px)] text-[#f5e7d7] text-center leading-none">
+                        <h1 className="font-[Retropix] text-[clamp(2.5rem,12vw,70px)] text-[#f5e7d7] retro-minimal text-center leading-none">
                             WEBKA
                         </h1>
                         <p className="text-center mt-3 sm:mt-4 text-[clamp(1rem,4vw,20px)] font-[Retropix] text-[#f5e7d7] px-4 max-w-full">
