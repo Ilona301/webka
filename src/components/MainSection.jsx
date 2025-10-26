@@ -6,16 +6,22 @@ import RetroLoader from "./RetroLoader.jsx";
 const MainSection = () => {
     const audioRef = useRef(null);
     const navigate = useNavigate();
-    const [isLoading, setIsLoading] = useState(true); // State to track loading
+    const [isLoading, setIsLoading] = useState(true);
 
-    // Simulate component loading (e.g., when critical content is ready)
+    // ✅ Handle viewport height for mobile (fixes iPhone bottom bar issue)
     useEffect(() => {
-        // You can add conditions here, e.g., check if images or other resources are loaded
-        const timer = setTimeout(() => {
-            setIsLoading(false); // Set loading to false after content is ready
-        }, 500); // Adjust delay as needed (or remove if using resource-based checks)
+        const setVh = () => {
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty("--vh", `${vh}px`);
+        };
+        setVh();
+        window.addEventListener("resize", setVh);
+        return () => window.removeEventListener("resize", setVh);
+    }, []);
 
-        return () => clearTimeout(timer); // Cleanup on unmount
+    useEffect(() => {
+        const timer = setTimeout(() => setIsLoading(false), 500);
+        return () => clearTimeout(timer);
     }, []);
 
     const handleClick = () => {
@@ -42,20 +48,28 @@ const MainSection = () => {
             <div className="relative w-full overflow-x-hidden">
                 <audio ref={audioRef} src="/audio/link_click.mp3" preload="auto" />
 
+                {/* ✅ Robot positioning adjusted so it's visible on mobile */}
                 <img
-                    className="absolute left-[-4rem] -translate-y-1/2 w-100 sm:w-100 md:w-100 lg:w-100 xl:w-[500px] h-auto z-10 pointer-events-none sm:top-[100vh]"
-                    style={{ top: "calc(var(--vh, 1vh) * 100)" }}
+                    className="absolute left-[-4rem] w-[400px] sm:w-[450px] md:w-[500px] h-auto z-10"
+                    style={{
+                        top: "calc(var(--vh, 1vh) * 100 - 250px)", // pushes it up slightly
+                    }}
                     src="/images/logo/robot.svg"
                     alt="robot"
-                    onLoad={() => setIsLoading(false)} // Optional: Trigger when image loads
+                    onLoad={() => setIsLoading(false)}
                 />
 
-                {/* MAIN HERO */}
+                {/* ✅ MAIN HERO */}
                 <div
-                    className="w-full flex flex-col justify-center items-center bg-[#52959e] gap-6 sm:gap-8 px-4 py-12"
-                    style={{ height: "calc(var(--vh, 1vh) * 100)" }}>
+                    className="w-full flex flex-col justify-center items-center bg-[#52959e] gap-6 sm:gap-8 px-4 py-12 transition-all duration-300"
+                    style={{
+                        // On mobile -> 50% screen, on larger -> full
+                        height: "calc(var(--vh, 1vh) * 100)",
+                        minHeight: "50dvh",
+                    }}
+                >
                     <div className="flex justify-center items-center flex-col max-w-full">
-                        <h1 className="font-[Retropix] text-[clamp(2.5rem,12vw,70px)] text-[#f5e7d7] retro-minimal text-center leading-none">
+                        <h1 className="font-[Retropix] text-[clamp(2.5rem,12vw,70px)] text-[#f5e7d7] text-center leading-none">
                             WEBKA
                         </h1>
                         <p className="text-center mt-3 sm:mt-4 text-[clamp(1rem,4vw,20px)] font-[Retropix] text-[#f5e7d7] px-4 max-w-full">
@@ -75,7 +89,7 @@ const MainSection = () => {
                     </button>
                 </div>
 
-                {/* ABOUT SECTION */}
+                {/* ✅ ABOUT SECTION */}
                 <AboutSection />
             </div>
         </>

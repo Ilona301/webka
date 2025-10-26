@@ -4,7 +4,7 @@ const WhyChooseSection = () => {
     return (
         <div className="flex justify-center items-center w-full min-h-[calc(100vh-60px)] bg-[#601d33] relative overflow-hidden py-12 px-4">
             <img
-                className="absolute left-[-6rem] sm:left-[-10rem] md:left-[-8rem] lg:left-[-12rem] top-[-6rem] lg:top-0 w-[300px] sm:w-[350px] md:w-[400px] lg:w-auto opacity-50 lg:opacity-100"
+                className="absolute left-[-6rem] sm:left-[-10rem] md:left-[-8rem] lg:left-[-12rem] top-[-6rem] lg:top-0 w-[300px] sm:w-[350px] md:w-[400px] lg:w-auto opacity-50 lg:opacity-50"
                 src="/images/globe.svg"
                 alt="globe"
             />
